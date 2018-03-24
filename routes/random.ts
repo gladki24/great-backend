@@ -42,18 +42,4 @@ router.get('/product/:number', (req, res) => {
     });
 });
 
-router.get('/recommended/:number', (req, res) => {
-    const sql = `
-    SELECT id,
-    title,
-    imgSrc AS imgSource
-    FROM product
-    ORDER BY RAND()
-    LIMIT ${req.params.number}`;
-    database.query(sql, (err, rows, fields) => {
-        if (err) { console.error(err); }
-        res.json(rows);
-    });
-});
-
 export { router };
