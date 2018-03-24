@@ -6,6 +6,40 @@ const router = express.Router();
 
 router.use(morgan(':remote-addr :method :url :status :res[content-length] - :response-time ms'));
 
+router.get('/brand/:brand/:number', (req, res) => {
+    const sql = `SELECT product.id AS id,
+    product.title AS title,
+    brand.name as brandName,
+    product.imgSrc as imgSource,
+    brand.logoSrc as logoSource
+    FROM product
+    JOIN brand
+    ON product.brand_id = brand.id
+    WHERE brand.id = ${req.params.brand}
+    LIMIT ${req.params.number}`;
+    database.query(sql, (err, rows, fields) => {
+        if (err) { console.error(err); }
+        res.json(rows);
+    });
+});
+
+router.get('/category/:category/:number', (req, res) => {
+    const sql = `SELECT product.id AS id,
+    product.title AS title,
+    brand.name as brandName,
+    product.imgSrc as imgSource,
+    brand.logoSrc as logoSource
+    FROM product
+    JOIN brand
+    ON product.brand_id = brand.id
+    WHERE product.category_id = ${req.params.category}
+    LIMIT ${req.params.number}`;
+    database.query(sql, (err, rows, fields) => {
+        if (err) { console.error(err); }
+        res.json(rows);
+    });
+});
+
 router.get('/:number/:brand/:category', (req, res) => {
    const sql = `SELECT product.id AS id,
     product.title AS title,
@@ -51,11 +85,11 @@ router.get('/brands', (req, res) => {
     SELECT
     id,
     name AS name,
-    logoSrc AS brandSource
+    logoSrc AS imgSource
     FROM  brand
     `;
     database.query(sql, (err, rows, fields) => {
-       if (err) { console.error(err) }
+       if (err) { console.error(err); }
        res.json(rows);
     });
 });
@@ -68,7 +102,7 @@ router.get('/categories', (req, res) => {
     FROM category
     `;
     database.query(sql, (err, rows, fields) => {
-        if (err) { console.error(err) }
+        if (err) { console.error(err); }
         res.json(rows);
     });
 });

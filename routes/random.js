@@ -24,12 +24,3 @@ router.get('/product/:number', function (req, res) {
         res.json(rows);
     });
 });
-router.get('/recommended/:number', function (req, res) {
-    var sql = "\n    SELECT id,\n    title,\n    imgSrc AS imgSource\n    FROM product\n    ORDER BY RAND()\n    LIMIT " + req.params.number;
-    database_1.database.query(sql, function (err, rows, fields) {
-        if (err) {
-            console.error(err);
-        }
-        res.json(rows);
-    });
-});

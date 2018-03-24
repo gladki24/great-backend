@@ -6,6 +6,24 @@ var database_1 = require("../database");
 var router = express.Router();
 exports.router = router;
 router.use(morgan(':remote-addr :method :url :status :res[content-length] - :response-time ms'));
+router.get('/brand/:brand/:number', function (req, res) {
+    var sql = "SELECT product.id AS id,\n    product.title AS title,\n    brand.name as brandName,\n    product.imgSrc as imgSource,\n    brand.logoSrc as logoSource\n    FROM product\n    JOIN brand\n    ON product.brand_id = brand.id\n    WHERE brand.id = " + req.params.brand + "\n    LIMIT " + req.params.number;
+    database_1.database.query(sql, function (err, rows, fields) {
+        if (err) {
+            console.error(err);
+        }
+        res.json(rows);
+    });
+});
+router.get('/category/:category/:number', function (req, res) {
+    var sql = "SELECT product.id AS id,\n    product.title AS title,\n    brand.name as brandName,\n    product.imgSrc as imgSource,\n    brand.logoSrc as logoSource\n    FROM product\n    JOIN brand\n    ON product.brand_id = brand.id\n    WHERE product.category_id = " + req.params.category + "\n    LIMIT " + req.params.number;
+    database_1.database.query(sql, function (err, rows, fields) {
+        if (err) {
+            console.error(err);
+        }
+        res.json(rows);
+    });
+});
 router.get('/:number/:brand/:category', function (req, res) {
     var sql = "SELECT product.id AS id,\n    product.title AS title,\n    brand.name as brandName,\n    product.imgSrc as imgSource,\n    brand.logoSrc as logoSource\n    FROM product\n    JOIN brand\n    ON product.brand_id = brand.id\n    WHERE brand.id = " + req.params.brand + "\n    AND product.category_id = " + req.params.category + "\n    LIMIT " + req.params.number;
     database_1.database.query(sql, function (err, rows, fields) {
@@ -25,7 +43,7 @@ router.get('/detail/:id', function (req, res) {
     });
 });
 router.get('/brands', function (req, res) {
-    var sql = "\n    SELECT\n    id,\n    name AS name,\n    logoSrc AS brandSource\n    FROM  brand\n    ";
+    var sql = "\n    SELECT\n    id,\n    name AS name,\n    logoSrc AS imgSource\n    FROM  brand\n    ";
     database_1.database.query(sql, function (err, rows, fields) {
         if (err) {
             console.error(err);
