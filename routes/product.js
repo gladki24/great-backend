@@ -33,30 +33,3 @@ router.get('/:number/:brand/:category', function (req, res) {
         res.json(rows);
     });
 });
-router.get('/detail/:id', function (req, res) {
-    var sql = "\n    SELECT product.title AS title,\n    product.price AS price,\n    product.imgSrc AS imgSource,\n    product.link AS link,\n    brand.name AS brandName,\n    brand.logoSrc AS logoSource,\n    category.name AS categoryName\n    FROM product\n    JOIN brand\n    ON product.brand_id = brand.id\n    JOIN category\n    ON product.category_id = category.id\n    WHERE product.id = \"" + req.params.id + "\"\n    ";
-    database_1.database.query(sql, function (err, rows, fields) {
-        if (err) {
-            console.error(err);
-        }
-        res.json(rows);
-    });
-});
-router.get('/brands', function (req, res) {
-    var sql = "\n    SELECT\n    id,\n    name AS name,\n    logoSrc AS imgSource\n    FROM  brand\n    ";
-    database_1.database.query(sql, function (err, rows, fields) {
-        if (err) {
-            console.error(err);
-        }
-        res.json(rows);
-    });
-});
-router.get('/categories', function (req, res) {
-    var sql = "\n    SELECT\n    id,\n    pl_name AS name\n    FROM category\n    ";
-    database_1.database.query(sql, function (err, rows, fields) {
-        if (err) {
-            console.error(err);
-        }
-        res.json(rows);
-    });
-});

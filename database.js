@@ -4,6 +4,6 @@ var mysql = require("mysql2");
 exports.database = mysql.createConnection({
     database: 'gr8_database',
     host: 'localhost',
-    password: '<password>',
+    password: 'OasisWonderwallGR8',
     user: 'gr8',
 });
