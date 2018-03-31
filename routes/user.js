@@ -11,11 +11,21 @@ router.post('/add', function (req, res) {
     var sql = "\n   INSERT INTO user\n   (id, email, nick, password, birth_date)\n   VALUES\n   ('" + id + "','" + req.body.email + "', '" + req.body.nick + "', '" + req.body.password + "', '" + req.body.birth + "')";
     database_1.database.query(sql, function (err, rows, fields) {
         if (err) {
-            console.error(err);
-            res.json('Error! User does not added');
+            res.status(409).json(false);
         }
         else {
-            res.json('User added!');
+            res.status(204).json(true);
+        }
+    });
+});
+router.post('/login', function (req, res) {
+    var sql = "\n    SELECT *\n    FROM user\n    WHERE '" + req.body.email + "' = email\n    AND '" + req.body.password + "' = password";
+    database_1.database.query(sql, function (err, rows, fields) {
+        if (err) {
+            res.status(404).json(false);
+        }
+        else {
+            res.status(200).json(rows);
         }
     });
 });
