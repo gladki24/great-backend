@@ -39,3 +39,15 @@ router.get('/collection/:id', function (req, res) {
         res.json(rows);
     });
 });
+router.post('/save', function (req, res) {
+    var sql = "\n    UPDATE user\n    SET\n    name = '" + req.body.name + "',\n    surname = '" + req.body.surname + "',\n    description = '" + req.body.description + "'\n    WHERE id = '" + req.body.id + "'";
+    database_1.database.query(sql, function (err, rows, fields) {
+        if (err) {
+            console.log(err);
+            res.status(409);
+        }
+        else {
+            res.status(200).json(true);
+        }
+    });
+});

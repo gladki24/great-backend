@@ -55,4 +55,22 @@ router.get('/collection/:id', (req, res) => {
     });
 });
 
+router.post('/save', (req, res) => {
+    const sql = `
+    UPDATE user
+    SET
+    name = '${req.body.name}',
+    surname = '${req.body.surname}',
+    description = '${req.body.description}'
+    WHERE id = '${req.body.id}'`;
+    database.query(sql, (err, rows, fields) => {
+       if (err) {
+           console.log(err);
+           res.status(409);
+       } else {
+           res.status(200).json(true);
+       }
+    });
+});
+
 export { router };
