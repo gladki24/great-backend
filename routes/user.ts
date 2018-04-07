@@ -13,9 +13,9 @@ router.post('/add', (req, res) => {
    VALUES
    ('${id}','${req.body.email}', '${req.body.nick}', '${req.body.password}', '${req.body.birth}');
    INSERT INTO collection
-   (title, user_id)
+   (title, user_id, default)
    VALUES
-   ('Moje zapisane produkty', '${id}');
+   ('Moje zapisane produkty', '${id}')
    `;
     database.query(sql, (err, rows, fields) => {
         if (err) {

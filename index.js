@@ -11,6 +11,7 @@ var Random = require("./routes/random");
 var SmallTile = require("./routes/smallTile");
 var Detail = require("./routes/detail");
 var User = require("./routes/user");
+var Collection = require("./routes/collection");
 var app = express();
 // Config
 app.use(cors());
@@ -22,6 +23,7 @@ app.use('/random', Random.router);
 app.use('/tile', SmallTile.router);
 app.use('/detail', Detail.router);
 app.use('/user', User.router);
+app.use('/collection', Collection.router);
 app.use(morgan(':remote-addr :method :url :status :res[content-length] - :response-time ms'));
 // App start
 app.listen(3000, function () {

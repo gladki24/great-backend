@@ -8,7 +8,7 @@ exports.router = router;
 router.use(morgan(':remote-addr :method :url :status :res[content-length] - :response-time ms'));
 router.post('/add', function (req, res) {
     var id = req.body.email.replace('@', '').replace('.', '_');
-    var sql = "\n   INSERT INTO user\n   (id, email, nick, password, birthDate)\n   VALUES\n   ('" + id + "','" + req.body.email + "', '" + req.body.nick + "', '" + req.body.password + "', '" + req.body.birth + "');\n   INSERT INTO collection\n   (title, user_id)\n   VALUES\n   ('Moje zapisane produkty', '" + id + "');\n   ";
+    var sql = "\n   INSERT INTO user\n   (id, email, nick, password, birthDate)\n   VALUES\n   ('" + id + "','" + req.body.email + "', '" + req.body.nick + "', '" + req.body.password + "', '" + req.body.birth + "');\n   INSERT INTO collection\n   (title, user_id, default)\n   VALUES\n   ('Moje zapisane produkty', '" + id + "')\n   ";
     database_1.database.query(sql, function (err, rows, fields) {
         if (err) {
             console.log(err);
