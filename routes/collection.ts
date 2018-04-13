@@ -8,6 +8,7 @@ router.use(morgan(':remote-addr :method :url :status :res[content-length] - :res
 
 router.get('/get/:id', (req, res) => {
     const sql = `SELECT
+    collection.title as collectionTitle,
     product.id as id,
     product.title as title,
     product.imgSrc as imgSource,
@@ -23,13 +24,14 @@ router.get('/get/:id', (req, res) => {
     database.query(sql, (err, rows, fields) => {
         if (err) {
             console.log(err);
+            res.json(false);
         } else {
             res.json(rows);
         }
     });
 });
 
-router.post('/add', (req, res) => {
+router.post('/addItem', (req, res) => {
     const sql = `SELECT id
     FROM collection
     WHERE user_id = '${req.body.userId}'
@@ -48,6 +50,50 @@ router.post('/add', (req, res) => {
                 res.status(200).json(true);
             }
         });
+    });
+});
+
+router.post('/new', (req, res) => {
+   const sql = `
+   INSERT INTO collection
+   (title, user_id)
+   VALUES
+   ('${req.body.name}', '${req.body.id}')
+   `;
+   database.query(sql, (err, rows, field) => {
+      if (err) {
+          console.log(err);
+          res.status(409).json(false);
+      } else {
+          res.status(200).json(true);
+      }
+   });
+});
+
+router.post('/delete', (req, res) => {
+    const sql = `DELETE FROM collection WHERE id = ${req.body.id}`;
+    database.query(sql, (err, rows, fields) => {
+        if (err) {
+            console.log(err);
+            res.status(409).json(false);
+        } else {
+            res.status(200).json(true);
+        }
+    });
+});
+
+router.get('/title/:id', (req, res) => {
+    const sql = `
+    SELECT title
+    FROM collection WHERE id = ${req.params.id}
+    `;
+    database.query(sql, (err, rows, fields) => {
+        if (err) {
+            console.log(err);
+            res.json(rows[0]);
+        } else {
+            res.json(rows[0]);
+        }
     });
 });
 
