@@ -10,8 +10,8 @@ router.get('/brand/:brand/:number', (req, res) => {
     const sql = `SELECT product.id AS id,
     product.title AS title,
     brand.name as brandName,
-    product.imgSrc as imgSource,
-    brand.logoSrc as logoSource
+    product.images_source as imgSource,
+    brand.logo_source as logoSource
     FROM product
     JOIN brand
     ON product.brand_id = brand.id
@@ -27,8 +27,8 @@ router.get('/category/:category/:number', (req, res) => {
     const sql = `SELECT product.id AS id,
     product.title AS title,
     brand.name as brandName,
-    product.imgSrc as imgSource,
-    brand.logoSrc as logoSource
+    product.image_source as imgSource,
+    brand.logo_source as logoSource
     FROM product
     JOIN brand
     ON product.brand_id = brand.id
@@ -44,8 +44,8 @@ router.get('/:number/:brand/:category', (req, res) => {
    const sql = `SELECT product.id AS id,
     product.title AS title,
     brand.name as brandName,
-    product.imgSrc as imgSource,
-    brand.logoSrc as logoSource
+    product.image_source as imgSource,
+    brand.logo_source as logoSource
     FROM product
     JOIN brand
     ON product.brand_id = brand.id

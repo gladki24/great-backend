@@ -7,7 +7,7 @@ var router = express.Router();
 exports.router = router;
 router.use(morgan(':remote-addr :method :url :status :res[content-length] - :response-time ms'));
 router.get('/product', function (req, res) {
-    var sql = "\n    SELECT product.id,\n    product.title,\n    brand.name,\n    product.imgSrc,\n    brand.logoSrc\n    FROM product\n    JOIN brand\n    ON product.brand_id = brand.id\n    ORDER BY RAND()\n    LIMIT 1";
+    var sql = "\n    SELECT product.id,\n    product.title,\n    brand.name,\n    product.image_source,\n    brand.logo_source\n    FROM product\n    JOIN brand\n    ON product.brand_id = brand.id\n    ORDER BY RAND()\n    LIMIT 1";
     database_1.database.query(sql, function (err, rows, fields) {
         if (err) {
             console.error(err);
@@ -16,7 +16,7 @@ router.get('/product', function (req, res) {
     });
 });
 router.get('/product/:number', function (req, res) {
-    var sql = "\n    SELECT product.id AS id,\n    product.title AS title,\n    brand.name as brandName,\n    product.imgSrc as imgSource,\n    brand.logoSrc as logoSource\n    FROM product\n    JOIN brand\n    ON product.brand_id = brand.id\n    ORDER BY RAND()\n    LIMIT " + req.params.number;
+    var sql = "\n    SELECT product.id AS id,\n    product.title AS title,\n    brand.name as brandName,\n    product.image_source as imgSource,\n    brand.logo_source as logoSource\n    FROM product\n    JOIN brand\n    ON product.brand_id = brand.id\n    ORDER BY RAND()\n    LIMIT " + req.params.number;
     database_1.database.query(sql, function (err, rows, fields) {
         if (err) {
             console.error(err);

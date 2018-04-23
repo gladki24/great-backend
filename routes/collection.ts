@@ -11,7 +11,7 @@ router.get('/get/:id', (req, res) => {
     collection.title as collectionTitle,
     product.id as id,
     product.title as title,
-    product.imgSrc as imgSource,
+    product.image_source as imgSource,
     brand.name as brandName
     FROM product
     JOIN brand

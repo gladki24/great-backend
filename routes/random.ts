@@ -11,8 +11,8 @@ router.get('/product', (req, res) => {
     SELECT product.id,
     product.title,
     brand.name,
-    product.imgSrc,
-    brand.logoSrc
+    product.image_source,
+    brand.logo_source
     FROM product
     JOIN brand
     ON product.brand_id = brand.id
@@ -29,8 +29,8 @@ router.get('/product/:number', (req, res) => {
     SELECT product.id AS id,
     product.title AS title,
     brand.name as brandName,
-    product.imgSrc as imgSource,
-    brand.logoSrc as logoSource
+    product.image_source as imgSource,
+    brand.logo_source as logoSource
     FROM product
     JOIN brand
     ON product.brand_id = brand.id

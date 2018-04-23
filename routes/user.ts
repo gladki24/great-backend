@@ -13,7 +13,7 @@ router.get('/:id', (req, res) => {
    nick,
    surname,
    description,
-   birthDate,
+   birth_date,
    email
    FROM user
    WHERE id = '${req.params.id}'
@@ -32,7 +32,7 @@ router.post('/add', (req, res) => {
     const id = req.body.email.replace('@', '').replace('.', '_');
     const sql = `
    INSERT INTO user
-   (id, email, nick, password, birthDate)
+   (id, email, nick, password, birth_date)
    VALUES
    ('${id}','${req.body.email}', '${req.body.nick}', '${req.body.password}', '${req.body.birth}');
    INSERT INTO collection

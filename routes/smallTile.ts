@@ -10,7 +10,7 @@ router.get('/brands', (req, res) => {
     SELECT
     id,
     name AS name,
-    logoSrc AS imgSource
+    logo_source AS imgSource
     FROM  brand
     `;
     database.query(sql, (err, rows, fields) => {
@@ -23,7 +23,7 @@ router.get('/categories', (req, res) => {
     const sql = `
     SELECT
     id,
-    pl_name AS name
+    polish_name AS name
     FROM category
     `;
     database.query(sql, (err, rows, fields) => {

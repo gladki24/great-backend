@@ -1,9 +1,9 @@
 import * as mysql from 'mysql2';
 
 export const database = mysql.createConnection({
-    database: 'gr8_database',
+    database: 'great_database',
     host: 'localhost',
     multipleStatements: true,
     password: 'OasisWonderwallGR8',
-    user: 'gr8',
+    user: 'great_backend',
 });

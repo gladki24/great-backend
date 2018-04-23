@@ -7,7 +7,7 @@ var router = express.Router();
 exports.router = router;
 router.use(morgan(':remote-addr :method :url :status :res[content-length] - :response-time ms'));
 router.get('/get/:id', function (req, res) {
-    var sql = "SELECT\n    collection.title as collectionTitle,\n    product.id as id,\n    product.title as title,\n    product.imgSrc as imgSource,\n    brand.name as brandName\n    FROM product\n    JOIN brand\n    ON product.brand_id = brand.id\n    JOIN collection_product\n    ON product.id = collection_product.product_id\n    JOIN collection\n    ON collection_product.collection_id = collection.id\n    WHERE collection.id = " + req.params.id + ";";
+    var sql = "SELECT\n    collection.title as collectionTitle,\n    product.id as id,\n    product.title as title,\n    product.image_source as imgSource,\n    brand.name as brandName\n    FROM product\n    JOIN brand\n    ON product.brand_id = brand.id\n    JOIN collection_product\n    ON product.id = collection_product.product_id\n    JOIN collection\n    ON collection_product.collection_id = collection.id\n    WHERE collection.id = " + req.params.id + ";";
     database_1.database.query(sql, function (err, rows, fields) {
         if (err) {
             console.log(err);
