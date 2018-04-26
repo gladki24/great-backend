@@ -23,7 +23,7 @@ router.get('/get/:id', (req, res) => {
     WHERE collection.id = ${req.params.id};`;
     database.query(sql, (err, rows, fields) => {
         if (err) {
-            console.log(err);
+            console.error(err);
             res.json(false);
         } else {
             res.json(rows);
@@ -90,10 +90,23 @@ router.get('/title/:id', (req, res) => {
     database.query(sql, (err, rows, fields) => {
         if (err) {
             console.log(err);
-            res.json(rows[0]);
-        } else {
-            res.json(rows[0]);
         }
+        res.json(rows[0]);
+    });
+});
+
+router.post('/add', (req, res) => {
+    const sql = `
+    INSERT INTO collection_product
+    (product_id, collection_id)
+    VALUES ('${req.body.productId}','${req.body.collectionId}')
+    `;
+    database.query(sql, (err, rows, fields) => {
+       if (err) {
+           console.log(err);
+           res.status(409).json(false);
+       }
+       res.json(err);
     });
 });
 

@@ -10,7 +10,7 @@ router.get('/get/:id', function (req, res) {
     var sql = "SELECT\n    collection.title as collectionTitle,\n    product.id as id,\n    product.title as title,\n    product.image_source as imgSource,\n    brand.name as brandName\n    FROM product\n    JOIN brand\n    ON product.brand_id = brand.id\n    JOIN collection_product\n    ON product.id = collection_product.product_id\n    JOIN collection\n    ON collection_product.collection_id = collection.id\n    WHERE collection.id = " + req.params.id + ";";
     database_1.database.query(sql, function (err, rows, fields) {
         if (err) {
-            console.log(err);
+            console.error(err);
             res.json(false);
         }
         else {
@@ -66,10 +66,17 @@ router.get('/title/:id', function (req, res) {
     database_1.database.query(sql, function (err, rows, fields) {
         if (err) {
             console.log(err);
-            res.json(rows[0]);
         }
-        else {
-            res.json(rows[0]);
+        res.json(rows[0]);
+    });
+});
+router.post('/add', function (req, res) {
+    var sql = "\n    INSERT INTO collection_product\n    (product_id, collection_id)\n    VALUES ('" + req.body.productId + "','" + req.body.collectionId + "')\n    ";
+    database_1.database.query(sql, function (err, rows, fields) {
+        if (err) {
+            console.log(err);
+            res.status(409).json(false);
         }
+        res.json(err);
     });
 });
