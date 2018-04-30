@@ -13,7 +13,7 @@ router.get('/:id', (req, res) => {
    nick,
    surname,
    description,
-   birth_date,
+   birth_date AS birthDate,
    email
    FROM user
    WHERE id = '${req.params.id}'

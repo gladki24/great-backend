@@ -105,8 +105,26 @@ router.post('/add', (req, res) => {
        if (err) {
            console.log(err);
            res.status(409).json(false);
+       } else {
+           res.status(200).json(true);
        }
-       res.json(err);
+    });
+});
+
+router.post('/remove', (req, res) => {
+    const sql = `
+    DELETE FROM collection_product
+    WHERE
+    collection_id = ${req.body.collectionId}
+    AND
+    product_id = '${req.body.productId}'`;
+    database.query(sql, (err, rows, fields) => {
+        if (err) {
+            console.log(err);
+            res.status(409).json(false);
+        } else {
+            res.status(200).json(true);
+        }
     });
 });
 

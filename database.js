@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var mysql = require("mysql2");
+const mysql = require("mysql2");
 exports.database = mysql.createConnection({
     database: 'great_database',
     host: 'localhost',
@@ -8,3 +8,4 @@ exports.database = mysql.createConnection({
     password: 'OasisWonderwallGR8',
     user: 'great_backend',
 });
+//# sourceMappingURL=database.js.map

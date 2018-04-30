@@ -23,3 +23,4 @@ var EBrand;
     EBrand[EBrand["HAndM"] = 6] = "HAndM";
     EBrand[EBrand["Cropp"] = 7] = "Cropp";
 })(EBrand = exports.EBrand || (exports.EBrand = {}));
+//# sourceMappingURL=Enums.js.map

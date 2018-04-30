@@ -1,14 +1,25 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var express = require("express");
-var morgan = require("morgan");
-var database_1 = require("../database");
-var router = express.Router();
+const express = require("express");
+const morgan = require("morgan");
+const database_1 = require("../database");
+const router = express.Router();
 exports.router = router;
 router.use(morgan(':remote-addr :method :url :status :res[content-length] - :response-time ms'));
-router.get('/:id', function (req, res) {
-    var sql = "\n   SELECT\n   id,\n   name,\n   nick,\n   surname,\n   description,\n   birth_date,\n   email\n   FROM user\n   WHERE id = '" + req.params.id + "'\n   ";
-    database_1.database.query(sql, function (err, rows, fields) {
+router.get('/:id', (req, res) => {
+    const sql = `
+   SELECT
+   id,
+   name,
+   nick,
+   surname,
+   description,
+   birth_date AS birthDate,
+   email
+   FROM user
+   WHERE id = '${req.params.id}'
+   `;
+    database_1.database.query(sql, (err, rows, fields) => {
         if (err) {
             console.log(err);
             res.status(409).json(false);
@@ -18,10 +29,19 @@ router.get('/:id', function (req, res) {
         }
     });
 });
-router.post('/add', function (req, res) {
-    var id = req.body.email.replace('@', '').replace('.', '_');
-    var sql = "\n   INSERT INTO user\n   (id, email, nick, password, birth_date)\n   VALUES\n   ('" + id + "','" + req.body.email + "', '" + req.body.nick + "', '" + req.body.password + "', '" + req.body.birth + "');\n   INSERT INTO collection\n   (title, user_id)\n   VALUES\n   ('Moje zapisane produkty', '" + id + "')\n   ";
-    database_1.database.query(sql, function (err, rows, fields) {
+router.post('/add', (req, res) => {
+    const id = req.body.email.replace('@', '').replace('.', '_');
+    const sql = `
+   INSERT INTO user
+   (id, email, nick, password, birth_date)
+   VALUES
+   ('${id}','${req.body.email}', '${req.body.nick}', '${req.body.password}', '${req.body.birth}');
+   INSERT INTO collection
+   (title, user_id)
+   VALUES
+   ('Moje zapisane produkty', '${id}')
+   `;
+    database_1.database.query(sql, (err, rows, fields) => {
         if (err) {
             console.log(err);
             res.status(409).json(false);
@@ -31,9 +51,13 @@ router.post('/add', function (req, res) {
         }
     });
 });
-router.post('/login', function (req, res) {
-    var sql = "\n    SELECT id\n    FROM user\n    WHERE '" + req.body.email + "' = email\n    AND '" + req.body.password + "' = password";
-    database_1.database.query(sql, function (err, rows, fields) {
+router.post('/login', (req, res) => {
+    const sql = `
+    SELECT id
+    FROM user
+    WHERE '${req.body.email}' = email
+    AND '${req.body.password}' = password`;
+    database_1.database.query(sql, (err, rows, fields) => {
         if (err) {
             res.status(404).json(rows[0]);
         }
@@ -42,18 +66,27 @@ router.post('/login', function (req, res) {
         }
     });
 });
-router.get('/collection/:id', function (req, res) {
-    var sql = "\n    SELECT title, id\n    FROM collection\n    WHERE user_id = '" + req.params.id + "'";
-    database_1.database.query(sql, function (err, rows, fields) {
+router.get('/collection/:id', (req, res) => {
+    const sql = `
+    SELECT title, id
+    FROM collection
+    WHERE user_id = '${req.params.id}'`;
+    database_1.database.query(sql, (err, rows, fields) => {
         if (err) {
             console.log(err);
         }
         res.json(rows);
     });
 });
-router.post('/save', function (req, res) {
-    var sql = "\n    UPDATE user\n    SET\n    name = '" + req.body.name + "',\n    surname = '" + req.body.surname + "',\n    description = '" + req.body.description + "'\n    WHERE id = '" + req.body.id + "'";
-    database_1.database.query(sql, function (err, rows, fields) {
+router.post('/save', (req, res) => {
+    const sql = `
+    UPDATE user
+    SET
+    name = '${req.body.name}',
+    surname = '${req.body.surname}',
+    description = '${req.body.description}'
+    WHERE id = '${req.body.id}'`;
+    database_1.database.query(sql, (err, rows, fields) => {
         if (err) {
             console.log(err);
             res.status(409);
@@ -63,3 +96,4 @@ router.post('/save', function (req, res) {
         }
     });
 });
+//# sourceMappingURL=user.js.map

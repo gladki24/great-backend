@@ -10,7 +10,7 @@ router.get('/brand/:brand/:number', (req, res) => {
     const sql = `SELECT product.id AS id,
     product.title AS title,
     brand.name as brandName,
-    product.images_source as imgSource,
+    product.image_source as imgSource,
     brand.logo_source as logoSource
     FROM product
     JOIN brand
