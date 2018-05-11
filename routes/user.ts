@@ -50,6 +50,21 @@ router.post('/add', (req, res) => {
     });
 });
 
+router.post('/delete', (req, res) => {
+    const sql = `
+    DELETE FROM user
+    WHERE id = '${req.body.id}'
+    `;
+    database.query(sql, (err, rows, fields) => {
+        if (err) {
+            console.log(err);
+            res.status(409).json(false);
+        } else {
+            res.status(200).json(true);
+        }
+    });
+});
+
 router.post('/login', (req, res) => {
     const sql = `
     SELECT id

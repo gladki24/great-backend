@@ -3,6 +3,7 @@ import * as express from 'express';
 import * as cors from 'cors';
 import * as morgan from 'morgan';
 import * as bodyParser from 'body-parser';
+import * as helmet from 'helmet';
 import { database } from './database.js';
 import * as Product from './routes/product';
 import * as Random from './routes/random';
@@ -14,6 +15,7 @@ import * as Collection from './routes/collection';
 const app = express();
 // Config
 app.use(cors());
+app.use(helmet());
 app.use(express.static('./public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));

@@ -5,6 +5,7 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
+const helmet = require("helmet");
 const database_js_1 = require("./database.js");
 const Product = require("./routes/product");
 const Random = require("./routes/random");
@@ -15,6 +16,7 @@ const Collection = require("./routes/collection");
 const app = express();
 // Config
 app.use(cors());
+app.use(helmet());
 app.use(express.static('./public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
