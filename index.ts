@@ -11,6 +11,7 @@ import * as SmallTile from './routes/smallTile';
 import * as Detail from './routes/detail';
 import * as User from './routes/user';
 import * as Collection from './routes/collection';
+import * as Tag from './routes/tag';
 
 const app = express();
 // Config
@@ -19,12 +20,14 @@ app.use(helmet());
 app.use(express.static('./public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+// Router
 app.use('/product', Product.router);
 app.use('/random', Random.router);
 app.use('/tile', SmallTile.router);
 app.use('/detail', Detail.router);
 app.use('/user', User.router);
 app.use('/collection', Collection.router);
+app.use('/tag', Tag.router);
 
 app.use(morgan(':remote-addr :method :url :status :res[content-length] - :response-time ms'));
 
