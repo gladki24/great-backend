@@ -1,6 +1,7 @@
 import * as express from 'express';
 import * as morgan from 'morgan';
 import {database} from '../database';
+import { signToken } from '../Util/AuthToken';
 
 const router = express.Router();
 router.use(morgan(':remote-addr :method :url :status :res[content-length] - :response-time ms'));

@@ -14,6 +14,7 @@ const Detail = require("./routes/detail");
 const User = require("./routes/user");
 const Collection = require("./routes/collection");
 const Tag = require("./routes/tag");
+const Search = require("./routes/search");
 const app = express();
 // Config
 app.use(cors());
@@ -29,6 +30,7 @@ app.use('/detail', Detail.router);
 app.use('/user', User.router);
 app.use('/collection', Collection.router);
 app.use('/tag', Tag.router);
+app.use('/search', Search.router);
 app.use(morgan(':remote-addr :method :url :status :res[content-length] - :response-time ms'));
 // App start
 app.listen(3000, () => {

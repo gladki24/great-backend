@@ -1,13 +1,9 @@
-import jwt from 'jsonwebtoken';
+import * as jwt from 'jsonwebtoken';
 
-export function authToken(token): Promise<any> {
-    return new Promise<any>((resolve, reject) => {
-       jwt.verify(token, process.env.JWT_SERCRET, (err, decodedToken) => {
-          if (err || !decodedToken) {
-              reject(err);
-          } else {
-              resolve(decodedToken);
-          }
-       });
-    });
+export function signToken(data: any): string | boolean {
+    if (data) {
+        return jwt.sign(JSON.stringify(data), 'secretTokenGreat');
+    } else {
+        return false;
+    }
 }

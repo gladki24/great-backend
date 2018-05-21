@@ -23,4 +23,9 @@ var EBrand;
     EBrand[EBrand["HAndM"] = 6] = "HAndM";
     EBrand[EBrand["Cropp"] = 7] = "Cropp";
 })(EBrand = exports.EBrand || (exports.EBrand = {}));
+var ESearchType;
+(function (ESearchType) {
+    ESearchType[ESearchType["Name"] = 1] = "Name";
+    ESearchType[ESearchType["Tag"] = 2] = "Tag";
+})(ESearchType = exports.ESearchType || (exports.ESearchType = {}));
 //# sourceMappingURL=Enums.js.map

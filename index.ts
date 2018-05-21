@@ -12,6 +12,7 @@ import * as Detail from './routes/detail';
 import * as User from './routes/user';
 import * as Collection from './routes/collection';
 import * as Tag from './routes/tag';
+import * as Search from './routes/search';
 
 const app = express();
 // Config
@@ -28,6 +29,7 @@ app.use('/detail', Detail.router);
 app.use('/user', User.router);
 app.use('/collection', Collection.router);
 app.use('/tag', Tag.router);
+app.use('/search', Search.router);
 
 app.use(morgan(':remote-addr :method :url :status :res[content-length] - :response-time ms'));
 
