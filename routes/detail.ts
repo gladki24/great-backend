@@ -23,8 +23,12 @@ router.get('/:id', (req, res) => {
     WHERE product.id = "${req.params.id}"
     `;
     database.query(sql, (err, rows, fields) => {
-        if (err) { console.error(err); }
-        res.json(rows);
+        if (err) {
+            console.log(err);
+            res.status(404).json(rows);
+        } else {
+            res.status(200).json(rows);
+        }
     });
 });
 

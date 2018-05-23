@@ -54,7 +54,10 @@ router.get('/:number/:brand/:category', (req, res) => {
         LIMIT ${req.params.number}`;
    }
    database.query(sql, (err, rows, fields) => {
-        if (err) { console.error(err); }
+        if (err) {
+            console.error(err);
+            res.status(404).json(false);
+        }
         res.json(rows);
     });
 });

@@ -24,9 +24,9 @@ router.get('/get/:id', (req, res) => {
     database.query(sql, (err, rows, fields) => {
         if (err) {
             console.error(err);
-            res.json(false);
+            res.status(404).json(false);
         } else {
-            res.json(rows);
+            res.status(200).json(rows);
         }
     });
 });
@@ -90,8 +90,10 @@ router.get('/title/:id', (req, res) => {
     database.query(sql, (err, rows, fields) => {
         if (err) {
             console.log(err);
+            res.status(404).json(false);
+        } else {
+            res.status(200).json(rows[0]);
         }
-        res.json(rows[0]);
     });
 });
 

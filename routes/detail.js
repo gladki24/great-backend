@@ -24,9 +24,12 @@ router.get('/:id', (req, res) => {
     `;
     database_1.database.query(sql, (err, rows, fields) => {
         if (err) {
-            console.error(err);
+            console.log(err);
+            res.status(404).json(rows);
         }
-        res.json(rows);
+        else {
+            res.status(200).json(rows);
+        }
     });
 });
 //# sourceMappingURL=detail.js.map

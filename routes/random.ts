@@ -19,8 +19,12 @@ router.get('/product', (req, res) => {
     ORDER BY RAND()
     LIMIT 1`;
     database.query(sql, (err, rows, fields) => {
-        if (err) { console.error(err); }
-        res.json(rows);
+        if (err) {
+            console.error(err);
+            res.status(404).json(false);
+        } else {
+            res.status(200).json(rows);
+        }
     });
 });
 
@@ -37,8 +41,12 @@ router.get('/product/:number', (req, res) => {
     ORDER BY RAND()
     LIMIT ${req.params.number}`;
     database.query(sql, (err, rows, fields) => {
-        if (err) { console.error(err); }
-        res.json(rows);
+        if (err) {
+            console.error(err);
+            res.status(404).json(false);
+        } else {
+            res.status(200).json(rows);
+        }
     });
 });
 

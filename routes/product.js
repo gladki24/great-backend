@@ -56,6 +56,7 @@ router.get('/:number/:brand/:category', (req, res) => {
     database_1.database.query(sql, (err, rows, fields) => {
         if (err) {
             console.error(err);
+            res.status(404).json(false);
         }
         res.json(rows);
     });

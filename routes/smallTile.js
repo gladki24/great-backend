@@ -17,8 +17,11 @@ router.get('/brands', (req, res) => {
     database_1.database.query(sql, (err, rows, fields) => {
         if (err) {
             console.error(err);
+            res.status(404).json(false);
         }
-        res.json(rows);
+        else {
+            res.status(200).json(rows);
+        }
     });
 });
 router.get('/categories', (req, res) => {
@@ -30,9 +33,12 @@ router.get('/categories', (req, res) => {
     `;
     database_1.database.query(sql, (err, rows, fields) => {
         if (err) {
-            console.error(err);
+            console.log(err);
+            res.status(404).json(false);
         }
-        res.json(rows);
+        else {
+            res.status(200).json(rows);
+        }
     });
 });
 //# sourceMappingURL=smallTile.js.map

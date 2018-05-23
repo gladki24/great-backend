@@ -14,8 +14,12 @@ router.get('/brands', (req, res) => {
     FROM  brand
     `;
     database.query(sql, (err, rows, fields) => {
-        if (err) { console.error(err); }
-        res.json(rows);
+        if (err) {
+            console.error(err);
+            res.status(404).json(false);
+        } else {
+            res.status(200).json(rows);
+        }
     });
 });
 
@@ -27,8 +31,12 @@ router.get('/categories', (req, res) => {
     FROM category
     `;
     database.query(sql, (err, rows, fields) => {
-        if (err) { console.error(err); }
-        res.json(rows);
+        if (err) {
+            console.log(err);
+            res.status(404).json(false);
+        } else {
+            res.status(200).json(rows);
+        }
     });
 });
 

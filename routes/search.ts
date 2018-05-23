@@ -46,9 +46,10 @@ router.get('/:number/:type/:query', (req, res) => {
     database.query(sql, (err, rows, fields) => {
         if (err) {
             console.log(err);
+            res.status(404).json(false);
+        } else {
+            res.status(200).json(rows);
         }
-        console.log(rows);
-        res.json(rows);
     });
 });
 
