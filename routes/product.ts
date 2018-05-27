@@ -58,7 +58,7 @@ router.get('/:number/:brand/:category', (req, res) => {
             console.error(err);
             res.status(404).json(false);
         }
-        res.json(rows);
+        res.status(200).json(rows);
     });
 });
 

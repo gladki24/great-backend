@@ -35,6 +35,10 @@ app.use(morgan(':remote-addr :method :url :status :res[content-length] - :respon
 // App start
 app.listen(3000, () => {
     database_js_1.database.connect();
+    setInterval(() => {
+        // keep connection alive
+        database_js_1.database.query('SELECT 1');
+    });
     console.log('Listen on 3000');
 });
 //# sourceMappingURL=index.js.map

@@ -27,7 +27,7 @@ router.get('/:number/:type/:query', (req, res) => {
         }
         case ESearchType.Tag: {
             sql = `
-            SELECT product.id AS id,
+            SELECT DISTINCT product.id AS id,
             product.title AS title,
             brand.name as brandName,
             product.image_source as imgSource,
