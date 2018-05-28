@@ -35,7 +35,7 @@ router.post('/add', (req, res) => {
     `;
     database_1.database.query(sql, (err, rows, fields) => {
         let sql2;
-        if (rows) {
+        if (rows[0]) {
             sql2 = `
             INSERT INTO product_tag_user
             (product_id, tag_id, user_id)

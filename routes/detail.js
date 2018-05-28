@@ -14,7 +14,7 @@ router.get('/:id', (req, res) => {
     product.link AS link,
     brand.name AS brandName,
     brand.logo_source AS logoSource,
-    category.name AS categoryName
+    category.polish_name AS categoryName
     FROM product
     JOIN brand
     ON product.brand_id = brand.id
